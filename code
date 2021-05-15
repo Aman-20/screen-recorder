@@ -1,0 +1,21 @@
+import pyautogui
+import numpy as np
+import cv2
+
+screenshot = pyautogui.screenshot()
+imageResolution = screenshot.size
+
+fourCC = cv2.VideoWriter_fourcc(*"mp4v")
+framerate = 20.0
+videowriter = cv2.VideoWriter("video.mp4", fourCC, framerate, imageResolution)
+
+for i in range(500):
+    screenshot = pyautogui.screenshot()
+    numpyimagearray = np.array(screenshot)
+    numpyimagearray = cv2.cvtColor(numpyimagearray, cv2.COLOR_BGR2RGB)
+    videowriter.write(numpyimagearray)
+
+cv2.destroyAllWindows()
+videowriter.release()
+
+
